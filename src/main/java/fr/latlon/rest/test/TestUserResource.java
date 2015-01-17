@@ -36,7 +36,6 @@ public class TestUserResource {
     public Response saveUser(User request) {
         userService.saveUser(request);
         userService.generateRandomFriends(request.getId());
-
         return ResponseUtils.createSuccessfulResponse();
     }
 
