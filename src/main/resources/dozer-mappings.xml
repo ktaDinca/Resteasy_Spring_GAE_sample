@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+    <mapping>
+        <class-a>fr.latlon.service.social.to.FacebookUserInfoResponseTO</class-a>
+        <class-b>fr.latlon.model.User</class-b>
+        <field>
+            <a>id</a>
+            <b>facebookId</b>
+        </field>
+        <field>
+            <a>last_name</a>
+            <b>lastname</b>
+        </field>
+        <field>
+            <a>first_name</a>
+            <b>firstname</b>
+        </field>
+    </mapping>
+
+</mappings>

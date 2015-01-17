@@ -6,5 +6,16 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="fr.latlon"/>
+    <context:property-placeholder location="classpath*:app.properties" />
+
+    <!--dozer mapper-->
+    <bean id="mapper" class="org.dozer.DozerBeanMapper">
+        <property name="mappingFiles">
+            <list>
+                <value>dozer-mappings.xml</value>
+            </list>
+        </property>
+    </bean>
+
 
 </beans>
