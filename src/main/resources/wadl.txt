@@ -1,0 +1,17 @@
+
+
+BaseUrl     /api
+
+Resources exposed:
+
+
+
+METHOD      URL                                     RESPONSE                            SHORT DESCRIPTION
+
+POST        /auth                                   (id,accessToken)                    send the facebookToken to be authenticateds
+
+PUT         /location                                                                   send your location
+GET         /location/{userid}                                                          get your friends locations
+
+
+

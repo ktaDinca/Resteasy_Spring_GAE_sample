@@ -21,14 +21,14 @@ import java.util.Map;
  */
 @Component
 @Path("/location")
+@Consumes("application/json")
+@Produces("application/json")
 public class LocationResource {
 
     @Autowired
     private LocationService locationService;
 
     @PUT
-    @Consumes("application/json")
-    @Produces("application/json")
     public Response pushLocation(PushLocationRequestTO request) {
         try {
             locationService.processLocationUpdate(request.getUserid(), request.getLatitude(), request.getLongitude());

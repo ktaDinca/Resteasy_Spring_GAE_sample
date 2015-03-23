@@ -1,5 +1,6 @@
 package fr.latlon.rest.auth.oauth;
 
+import fr.latlon.rest.auth.to.AuthenticationResponse;
 import fr.latlon.service.auth.AuthenticationService;
 import fr.latlon.service.social.FacebookService;
 import fr.latlon.util.MiscelaneousUtils;
@@ -31,7 +32,7 @@ public class OAuthResource {
             return ResponseUtils.createBadRequestResponse();
         }
 
-        authenticationService.processAuth(request.getToken());
-        return Response.status(200).build();
+        AuthenticationResponse response = authenticationService.processAuth(request.getToken());
+        return Response.status(201).entity(response).build();
     }
 }

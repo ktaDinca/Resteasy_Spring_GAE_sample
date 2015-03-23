@@ -1,6 +1,7 @@
 package fr.latlon.dao;
 
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.KeyRange;
 import fr.latlon.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -11,13 +12,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDAO extends BaseDAO {
 
+
+
     public void saveUser(User user) {
-        Entity _user = new Entity(User.class.getName(), user.getId());
-        _user.setProperty("id", user.getId());
+
+        KeyRange keyRange = datastore.allocateIds("user_", 1000L);
+
+        Entity _user = new Entity(User.class.getName());
         _user.setProperty("lastname", user.getLastname());
         _user.setProperty("firstname", user.getFirstname());
         _user.setProperty("email", user.getEmail());
         _user.setProperty("facebookId", user.getFacebookId());
+        _user.setProperty("pToken", user.getAccessToken());
 
         datastore.put(_user);
     }
