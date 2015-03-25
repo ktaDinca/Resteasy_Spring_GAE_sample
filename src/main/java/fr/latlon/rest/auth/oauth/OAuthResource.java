@@ -2,15 +2,15 @@ package fr.latlon.rest.auth.oauth;
 
 import fr.latlon.rest.auth.to.AuthenticationResponse;
 import fr.latlon.service.auth.AuthenticationService;
-import fr.latlon.service.social.FacebookService;
 import fr.latlon.util.MiscelaneousUtils;
 import fr.latlon.util.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 /**
@@ -20,6 +20,8 @@ import javax.ws.rs.core.Response;
 
 @Component
 @Path("/auth")
+@Consumes("application/json")
+@Produces("application/json")
 public class OAuthResource {
 
     @Autowired

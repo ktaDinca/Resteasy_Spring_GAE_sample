@@ -4,6 +4,7 @@ import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import fr.latlon.exception.AuthenticationFailureException;
 import fr.latlon.model.Location;
+import fr.latlon.rest.location.to.PushLocationRequestTO;
 import fr.latlon.service.memcached.SyncMemcachedService;
 import fr.latlon.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +40,13 @@ public class LocationService {
      * Saves user's location in the Memcache.
      * {"userid_loc":{location}}
      *
-     * @param userid
-     * @param latitude
-     * @param longitude
      * @throws AuthenticationFailureException
      */
-    public void processLocationUpdate(Long userid, Float latitude, Float longitude) throws AuthenticationFailureException {
+    public void processLocationUpdateRequest(PushLocationRequestTO request) throws AuthenticationFailureException {
         if (!userService.assertUserIsReal()) {
             throw new AuthenticationFailureException();
         }
-        putLocation(userid, latitude, longitude);
+        putLocation(request.getUserid(), request.getLatitude(), request.getLongitude());
     }
 
     private void putLocation(Long userid, Float latitude, Float longitude) {

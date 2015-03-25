@@ -40,6 +40,8 @@ public class UserService {
 
 
     /**
+     * TODO: define the algorithm
+     *
      * Checks in the datastore to ensure the user is real
      */
     public boolean assertUserIsReal() {

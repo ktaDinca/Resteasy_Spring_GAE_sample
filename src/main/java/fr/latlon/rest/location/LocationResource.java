@@ -2,7 +2,6 @@ package fr.latlon.rest.location;
 
 import fr.latlon.exception.AuthenticationFailureException;
 import fr.latlon.model.Location;
-import fr.latlon.rest.location.to.GetLocationsRequestTO;
 import fr.latlon.rest.location.to.PushLocationRequestTO;
 import fr.latlon.service.location.LocationService;
 import fr.latlon.util.ResponseUtils;
@@ -31,7 +30,7 @@ public class LocationResource {
     @PUT
     public Response pushLocation(PushLocationRequestTO request) {
         try {
-            locationService.processLocationUpdate(request.getUserid(), request.getLatitude(), request.getLongitude());
+            locationService.processLocationUpdateRequest(request);
         }
         catch(AuthenticationFailureException e) {
             return ResponseUtils.createBadRequestResponse(Arrays.asList("The user provided is unknown"));
@@ -42,8 +41,6 @@ public class LocationResource {
 
     @GET
     @Path("/{userid}")
-    @Consumes("application/json")
-    @Produces("application/json")
     public Response getFriendLocations(@PathParam("userid") Long userid) {
         Map<Long, Location> friendsLocations;
         Map<String, Object> response = new HashMap<String, Object>();
