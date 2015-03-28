@@ -1,10 +1,13 @@
 package fr.latlon.service.auth;
 
-import fr.latlon.dao.UserDAO;
+import com.google.appengine.api.datastore.Key;
+import fr.latlon.dao.entity.UserDAO;
 import fr.latlon.exception.TokenExchangeFailedException;
 import fr.latlon.exception.UserAuthFailedException;
+import fr.latlon.model.SocialInfo;
 import fr.latlon.model.User;
 import fr.latlon.rest.auth.to.AuthenticationResponse;
+import fr.latlon.service.auth.jwt.JsonWebTokenService;
 import fr.latlon.service.social.FacebookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,9 @@ public class AuthenticationService {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private JsonWebTokenService jsonWebTokenService;
+
 
     /**
      * Processes a short-lived token
@@ -38,22 +44,19 @@ public class AuthenticationService {
         if (facebookPermToken == null) {
             throw new TokenExchangeFailedException();
         }
+        if (user.getSocialInfo() == null) {
+            user.setSocialInfo(new SocialInfo());
+        }
+        user.getSocialInfo().setToken(facebookPermToken);
+
+        Long userId = userDAO.saveUser(user);
 
         /*
-         TODO: generate a JWToken and send it back
-         This is actually the social token used for connecting with the social networks
-         for user's information.
-
          In order to authenticate the user into this API, a new Json Web Token must be
          created, with whom the further authentication process will continue.
          */
-        String accessToken = facebookPermToken;
-        user.setAccessToken(facebookPermToken);
+        String accessToken = jsonWebTokenService.createJsonWebToken(userId.toString());
 
-        user.setFacebookToken(facebookPermToken);
-        userDAO.saveUser(user);
-
-        // TODO: get the real user_id and send it back to the client
-        return new AuthenticationResponse(accessToken, 1L);
+        return new AuthenticationResponse(accessToken, userId);
     }
 }

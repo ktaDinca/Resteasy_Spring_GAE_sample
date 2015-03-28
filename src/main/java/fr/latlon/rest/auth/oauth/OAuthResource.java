@@ -3,7 +3,7 @@ package fr.latlon.rest.auth.oauth;
 import fr.latlon.rest.auth.to.AuthenticationResponse;
 import fr.latlon.service.auth.AuthenticationService;
 import fr.latlon.util.MiscelaneousUtils;
-import fr.latlon.util.ResponseUtils;
+import fr.latlon.util.rest.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

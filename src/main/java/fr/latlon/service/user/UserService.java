@@ -1,8 +1,9 @@
 package fr.latlon.service.user;
 
+import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
-import fr.latlon.dao.UserDAO;
+import fr.latlon.dao.entity.UserDAO;
 import fr.latlon.model.User;
 import fr.latlon.service.memcached.SyncMemcachedService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,17 @@ public class UserService {
     public void saveUser(User user) {
         if (user != null) {
             userDAO.saveUser(user);
+        }
+    }
+
+    public User getUser(Long id) {
+        if (id == null) {
+            return null;
+        }
+        try {
+            return userDAO.getUser(id);
+        } catch (EntityNotFoundException e) {
+            return null;
         }
     }
 

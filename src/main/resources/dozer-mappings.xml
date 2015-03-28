@@ -9,7 +9,7 @@
         <class-b>fr.latlon.model.User</class-b>
         <field>
             <a>id</a>
-            <b>facebookId</b>
+            <b>socialInfo.id</b>
         </field>
         <field>
             <a>last_name</a>

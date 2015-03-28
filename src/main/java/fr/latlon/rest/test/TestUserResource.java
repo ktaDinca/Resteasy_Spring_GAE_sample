@@ -2,14 +2,11 @@ package fr.latlon.rest.test;
 
 import fr.latlon.model.User;
 import fr.latlon.service.user.UserService;
-import fr.latlon.util.ResponseUtils;
+import fr.latlon.util.rest.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 /**
@@ -20,6 +17,8 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Path("/test/user")
+@Consumes("application/json")
+@Produces("application/json")
 public class TestUserResource {
 
     @Autowired
@@ -27,16 +26,13 @@ public class TestUserResource {
 
 
     /**
-     * Creates a new user and generates imaginary friends
+     * Retrieves information about a {@link fr.latlon.model.User}
      */
-    @Path("/")
-    @PUT
-    @Consumes("application/json")
-    @Produces("application/json")
-    public Response saveUser(User request) {
-        userService.saveUser(request);
-        userService.generateRandomFriends(request.getId());
-        return ResponseUtils.createSuccessfulResponse();
+    @Path("/{userId}")
+    @GET
+    public Response getUser(@PathParam("userId") Long userId) {
+        User user = userService.getUser(userId);
+        return ResponseUtils.createSuccessfulResponse(user);
     }
 
 }

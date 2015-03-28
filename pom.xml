@@ -7,14 +7,13 @@
     <version>1.0-SNAPSHOT</version>
 
     <groupId>fr.locationapi</groupId>
-    <artifactId>latlon</artifactId>
+    <artifactId>location-api</artifactId>
 
     <properties>
         <appengine.app.version>1</appengine.app.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.2.0.RELEASE</spring.version>
         <resteasy.version>2.2.3.GA</resteasy.version>
-
     </properties>
 
     <prerequisites>
@@ -111,6 +110,16 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.jsontoken</groupId>
+            <artifactId>jsontoken</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
         </dependency>
     </dependencies>
 

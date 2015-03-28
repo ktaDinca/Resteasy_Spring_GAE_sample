@@ -6,28 +6,21 @@ package fr.latlon.model;
  */
 public class User {
 
-    private Long id;
-    private Long facebookId;
     private String accessToken;
-    private String facebookToken;
+    private SocialInfo socialInfo;
     private String lastname;
     private String firstname;
     private String email;
 
-    public Long getId() {
-        return id;
+    public User() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getFacebookId() {
-        return facebookId;
-    }
-
-    public void setFacebookId(Long facebookId) {
-        this.facebookId = facebookId;
+    public User(String accessToken, SocialInfo socialInfo, String lastname, String firstname, String email) {
+        this.accessToken = accessToken;
+        this.socialInfo = socialInfo;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.email = email;
     }
 
     public String getLastname() {
@@ -62,11 +55,11 @@ public class User {
         this.accessToken = accessToken;
     }
 
-    public String getFacebookToken() {
-        return facebookToken;
+    public SocialInfo getSocialInfo() {
+        return socialInfo;
     }
 
-    public void setFacebookToken(String facebookToken) {
-        this.facebookToken = facebookToken;
+    public void setSocialInfo(SocialInfo socialInfo) {
+        this.socialInfo = socialInfo;
     }
 }

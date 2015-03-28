@@ -1,10 +1,12 @@
 package fr.latlon.rest.location;
 
+
 import fr.latlon.exception.AuthenticationFailureException;
 import fr.latlon.model.Location;
 import fr.latlon.rest.location.to.PushLocationRequestTO;
 import fr.latlon.service.location.LocationService;
-import fr.latlon.util.ResponseUtils;
+import fr.latlon.util.rest.ErrorItem;
+import fr.latlon.util.rest.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +35,7 @@ public class LocationResource {
             locationService.processLocationUpdateRequest(request);
         }
         catch(AuthenticationFailureException e) {
-            return ResponseUtils.createBadRequestResponse(Arrays.asList("The user provided is unknown"));
+            return ResponseUtils.createBadRequestResponse(Arrays.asList(new ErrorItem("userid", "Invalid user id")));
         }
         return ResponseUtils.createSuccessfulResponse();
     }
@@ -50,8 +52,7 @@ public class LocationResource {
             return ResponseUtils.createSuccessfulResponse(response);
         }
         catch (AuthenticationFailureException e) {
-            return ResponseUtils.createBadRequestResponse(Arrays.asList("The user provided is unknown"));
+            return ResponseUtils.createBadRequestResponse(Arrays.asList(new ErrorItem("userid", "Invalid user id")));
         }
     }
-
 }
